@@ -71,15 +71,28 @@
   </table>
       </div>
 	  <h4 align="center">Select Firewall</h4>
-	  <button onclick="vyos()">VyOS</button>
-	  <form id="vyosform" action="/action_page.php"></form>
-    </div>
+	  <button onclick="vyosformshow()">VyOS</button>
+
+	  <div id="vyosform" style="display:none">
+		<form action="/action_page.php" style="display: hidden">
+		  First name:<br>
+		  <input type="text" name="firstname" value="Mickey">
+		  <br>
+		  Last name:<br>
+		  <input type="text" name="lastname" value="Mouse">
+		  <br><br>
+		  <input type="submit" value="Submit">
+
+		</form>
+	</div>
+  </div>
 
 
 
 <script>
-function vyos(){
-	document.getElementById("vyosform").innerHTML = 
+
+function vyosformshow(){
+	document.getElementById("vyosform").style.display = "block";
 }
 
 </script>
