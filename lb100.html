@@ -74,15 +74,18 @@
 	  <button onclick="vyosformshow()">VyOS</button>
 
 	  <div id="vyosform" style="display:none">
-		<form action="/action_page.php" style="display: hidden">
-		  First name:<br>
-		  <input type="text" name="firstname" value="Mickey">
-		  <br>
-		  Last name:<br>
-		  <input type="text" name="lastname" value="Mouse">
-		  <br><br>
-		  <input type="submit" value="Submit">
+		<form>
+		  <div class="form-group">
+			<label for="exampleInputEmail1">firewall in name</label>
+			<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+			<small id="emailHelp" class="form-text text-muted"></small>
+		  </div>
+		  <div class="form-group">
+			<label for="exampleInputPassword1">firewall out name</label>
+			<input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+		  </div>
 
+		  <button type="submit" class="btn btn-primary" style="align:center">Submit</button>
 		</form>
 	</div>
   </div>
