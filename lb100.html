@@ -71,21 +71,37 @@
   </table>
       </div>
 	  <h4 align="center">Select Firewall</h4>
-	  <button onclick="vyosformshow()">VyOS</button>
-
+	  <div align="center">
+	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" onclick="vyosformshow()">VyOS</button>
+	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >IPTables</button>
+	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >FreePBX</button>
+	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >VyOS</button>
+	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >VyOS</button>
+	  </div>
 	  <div id="vyosform" style="display:none">
 		<form>
-		  <div class="form-group">
-			<label for="exampleInputEmail1">firewall in name</label>
-			<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-			<small id="emailHelp" class="form-text text-muted"></small>
-		  </div>
-		  <div class="form-group">
-			<label for="exampleInputPassword1">firewall out name</label>
-			<input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
-		  </div>
-
-		  <button type="submit" class="btn btn-primary" style="align:center">Submit</button>
+			<div class="form-row">
+			  <div class="form-group col-md-6">
+				<label for="exampleInputEmail1">firewall in name</label>
+				<input class="form-control" type="text" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+				<small id="emailHelp" class="form-text text-muted"></small>
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="exampleInputPassword1">firewall out name</label>
+				<input class="form-control" type="text" id="exampleInputPassword1" placeholder="">
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="exampleInputPassword1">rule number</label>
+				<input class="form-control" type="text" id="exampleInputPassword1" placeholder="">
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="exampleInputPassword1">device IP address</label>
+				<input class="form-control" type="text" id="exampleInputPassword1" placeholder="">
+			  </div>
+			  <div align="center">
+				<button type="submit" class="btn btn-primary" style="margin-bottom:30px">Submit</button>
+			  </div>
+			</div>
 		</form>
 	</div>
   </div>
