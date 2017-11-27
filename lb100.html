@@ -73,9 +73,9 @@
 	  <h4 align="center">Select Firewall</h4>
 	  <div align="center">
 	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" onclick="vyosformshow()">VyOS</button>
-	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >IPTables</button>
+	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" onclick="download('test.sh','hello\nworld')">IPTables</button>
 	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >FreePBX</button>
-	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >VyOS</button>
+	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" onclick="dthings()">VyOS</button>
 	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >VyOS</button>
 	  </div>
 	  <div id="vyosform" style="display:none">
@@ -83,23 +83,22 @@
 			<div class="form-row">
 			  <div class="form-group col-md-6">
 				<label for="exampleInputEmail1">firewall in name</label>
-				<input class="form-control" type="text" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-				<small id="emailHelp" class="form-text text-muted"></small>
+				<input class="form-control" id="firein" placeholder="">
 			  </div>
 			  <div class="form-group col-md-6">
 				<label for="exampleInputPassword1">firewall out name</label>
-				<input class="form-control" type="text" id="exampleInputPassword1" placeholder="">
+				<input class="form-control" type="text" id="fireout" placeholder="">
 			  </div>
 			  <div class="form-group col-md-6">
 				<label for="exampleInputPassword1">rule number</label>
-				<input class="form-control" type="text" id="exampleInputPassword1" placeholder="">
+				<input class="form-control" id="rulenum" placeholder="">
 			  </div>
 			  <div class="form-group col-md-6">
 				<label for="exampleInputPassword1">device IP address</label>
-				<input class="form-control" type="text" id="exampleInputPassword1" placeholder="">
+				<input class="form-control" id="ip" placeholder="">
 			  </div>
 			  <div align="center">
-				<button type="submit" class="btn btn-primary" style="margin-bottom:30px">Submit</button>
+				<button onclick="dthings()" class="btn btn-primary" style="margin-bottom:30px">Submit</button>
 			  </div>
 			</div>
 		</form>
@@ -109,7 +108,45 @@
 
 
 <script>
+function dthings(){
+	var c = "configure\n"
+	var config1 = "set firewall name ";
+	var firein = document.getElementById("firein").value;
+	var config2 = " rule ";
+	var rulenum = document.getElementById("rulenum").value;
+	var base = config1.concat(firein,config2,rulenum);
+	
+	var config3 = " action 'accept'\n";
+	var config4 = " source address ";
+	var ip = document.getElementById("ip").value;
+	var bsp = " \n";
+	var config5 = " destination port '80085,8008'\n";
+	var config6 = " protocol 'tcp_udp'\n";
+	var config7 = " state new 'enable'\n";
+	var config8 = "commit\nsave\nexit";
 
+	var config = c.concat(base,config3,base,config4,ip,bsp,base,config5,base,config6,base,config7,config8);
+	download("lb100.sh", config);
+	//set span id firewallin to the id/name of the input from user 
+	//change the id p style to non hidden and then add to the download part that the text is grabbed from that innerhtml
+}
+
+function download(filename, text) {
+    
+	
+	var pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    pom.setAttribute('download', filename);
+
+    if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+    }
+    else {
+        pom.click();
+    }
+}
 function vyosformshow(){
 	document.getElementById("vyosform").style.display = "block";
 }
