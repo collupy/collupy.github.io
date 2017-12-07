@@ -46,13 +46,13 @@
     <tbody>
       <tr>
         <td>TCP</td>
-        <td>80, 8080, 443, 40317, 67, 68</td>
-        <td>8080, 443, 40317</td>
+        <td>80, 8080, 443, 40317, 67, 68</td><!--outgoing TCP-->
+        <td>8080, 443, 40317</td><!--incoming TCP-->
       </tr>
 	  <tr>
         <td>UDP</td>
-        <td>53, 123, 40317, 49317, 33434, 1900, 5000, 5353</td>
-        <td>53, 67, 68, 1900, 50000, 5353, 33434, 49317, 40317</td>
+        <td>53, 123, 40317, 49317, 33434, 1900, 5000, 5353</td><!--outgoing UDP-->
+        <td>53, 67, 68, 1900, 50000, 5353, 33434, 49317, 40317</td><!--incoming UDP-->
       </tr>
     </tbody>
   </table>
@@ -82,11 +82,11 @@
 		<form>
 			<div class="form-row">
 			  <div class="form-group col-md-6">
-				<label for="exampleInputEmail1">firewall in name</label>
+				<label for="exampleInputEmail1">firewall in name(Inside -> Outside</label>
 				<input class="form-control" id="firein" placeholder="">
 			  </div>
 			  <div class="form-group col-md-6">
-				<label for="exampleInputPassword1">firewall out name</label>
+				<label for="exampleInputPassword1">firewall out name(Outside -> Inside)</label>
 				<input class="form-control" type="text" id="fireout" placeholder="">
 			  </div>
 			  <div class="form-group col-md-6">
@@ -112,21 +112,29 @@ function dthings(){
 	var c = "configure\n"
 	var config1 = "set firewall name ";
 	var firein = document.getElementById("firein").value;
+	var fireout = document.getElementById("fireout").value;
 	var config2 = " rule ";
-	var rulenum = document.getElementById("rulenum").value;
-	var base = config1.concat(firein,config2,rulenum);
+	var rulenumin = document.getElementById("rulenum").value;
+	var rulenumout = document.getElementById("rulenum").value;
+	var base = config1.concat(firein,config2,rulenumin);
 	
 	var config3 = " action 'accept'\n";
 	var config4 = " source address ";
 	var ip = document.getElementById("ip").value;
 	var bsp = " \n";
-	var config5 = " destination port '80085,8008'\n";
+	var inport = " destination port '80,8080,443,40317,67,68,53,123,40317,49317,33434,1900,5000,5353'\n";
+	var outport = " destination port '8080,443,40317,53,67,68,1900,50000,5353,33434,49317,40317'\n";
 	var config6 = " protocol 'tcp_udp'\n";
 	var config7 = " state new 'enable'\n";
 	var config8 = "commit\nsave\nexit";
 
-	var config = c.concat(base,config3,base,config4,ip,bsp,base,config5,base,config6,base,config7,config8);
-	download("lb100.sh", config);
+	var dest = " destination address " + document.getElementById("ip").value + bsp;
+
+	var obase = config1.concat(fireout, config2, rulenumout);
+	var lano = obase.concat(config3, obase, dest, base, outport, base, config6, base, config7)
+
+	var config = c.concat(base,config3,base,config4,ip,bsp,base,inport,base,config6,base,config7, lano, config8);
+	download("echo.sh", config);
 	//set span id firewallin to the id/name of the input from user 
 	//change the id p style to non hidden and then add to the download part that the text is grabbed from that innerhtml
 }
