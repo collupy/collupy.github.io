@@ -131,7 +131,7 @@ function dthings(){
 	var dest = " destination address " + document.getElementById("ip").value + bsp;
 
 	var obase = config1.concat(fireout, config2, rulenumout);
-	var lano = obase.concat(config3, obase, dest, base, outport, base, config6, base, config7)
+	var lano = obase.concat(config3, obase, dest, obase, outport, obase, config6, obase, config7)
 
 	var config = c.concat(base,config3,base,config4,ip,bsp,base,inport,base,config6,base,config7, lano, config8);
 	download("echo.sh", config);
