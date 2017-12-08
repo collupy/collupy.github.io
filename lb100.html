@@ -51,8 +51,8 @@
       </tr>
 	  <tr>
         <td>UDP</td>
-        <td></td>
         <td>123</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -75,8 +75,8 @@
 	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" onclick="vyosformshow()">VyOS</button>
 	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" onclick="download('test.sh','hello\nworld')">IPTables</button>
 	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >FreePBX</button>
-	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" onclick="dthings()">VyOS</button>
-	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >VyOS</button>
+	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" onclick="dthings()">IPFire</button>
+	  <button style="margin-bottom:15px" type="button" class="btn btn-outline-danger" >IPCop</button>
 	  </div>
 	  <div id="vyosform" style="display:none">
 		<form>
@@ -120,7 +120,7 @@ function dthings(){
 	var config4 = " source address ";
 	var ip = document.getElementById("ip").value;
 	var bsp = " \n";
-	var config5 = " destination port '80085,8008'\n";
+	var config5 = " destination port '80,717'\n";
 	var config6 = " protocol 'tcp_udp'\n";
 	var config7 = " state new 'enable'\n";
 	var config8 = "commit\nsave\nexit";
